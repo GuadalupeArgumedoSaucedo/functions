@@ -2,12 +2,10 @@
 function getSocSecTax(grossPay) {
     return grossPay * 0.062; 
 }
-
 //it accepts a gross pay and returns the Medicare tax on that amount. Assume a tax rate of 1.45%
 function getMedicareTax(grossPay) {
     return grossPay * 0.0145;
 }
-
 //it accepts a gross pay and withholding code and returns the federal tax withholding on that amount.
 function getFederalTax(grossPay, withholdingCode) {
     let taxRate;
@@ -25,5 +23,24 @@ function getFederalTax(grossPay, withholdingCode) {
     }
 
     return grossPay * taxRate;
-
 }
+// Test cases
+const persons = [
+    { name: "Person 1", grossPay: 750, withholdingCode: 0 },
+    { name: "Person 2", grossPay: 1550, withholdingCode: 2 },
+    { name: "Person 3", grossPay: 1100, withholdingCode: 6 }
+];
+
+// Function to display results for each person
+const displayResults = person => {
+    const socSecTax = getSocSecTax(person.grossPay);
+    const medicareTax = getMedicareTax(person.grossPay);
+    const federalTax = getFederalTax(person.grossPay, person.withholdingCode);
+    
+    console.log(`${person.name}:`);
+    console.log(`Gross Pay: $${person.grossPay}`);
+    console.log(`Withholding code: ${person.withholdingCode}`);
+};
+
+// Display results for each person
+persons.forEach(displayResults);
